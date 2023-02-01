@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      #timer {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        padding: 50px;
+        width: 400px;
+        height: 250px;
+        margin: 0 auto;
+      }
+      .green {
+        background-color: green;
+      }
+      .orange {
+        background-color: orange;
+      }
+      .red {
+        background-color: red;
+      }
+      .purple {
+        background-color: purple;
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="timer" class="green">
+      <p >Presentation</p>
+      <p id="clock">00:00:00</p>
+    </div>
+    <button id="resetBtn">Reset</button>
+    <script>
+      const timerDisplay = document.querySelector("#timer p:first-child");
+      const clockDisplay = document.querySelector("#clock");
+      const resetBtn = document.querySelector("#resetBtn");
+      let minutes = 0;
+      let seconds = 0;
+      let hours = 0;
+      
+      resetBtn.addEventListener("click", function() {
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        clockDisplay.innerHTML = "00:00:00";
+      });
+      
+      setInterval(function() {
+        seconds++;
+        if (seconds === 60) {
+          minutes++;
+          seconds = 0;
+        }
+        if (minutes === 60) {
+          hours++;
+          minutes = 0;
+        }
+        if (hours === 24) {
+          hours = 0;
+        }
+        clockDisplay.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+        if (minutes >= 0 && minutes <= 17) {
+          timerDisplay.innerHTML = "Presentation";
+          timerDisplay.className = "green";
+        } else if (minutes >= 17 && minutes <= 21) {
+          timerDisplay.innerHTML = "Last 5 Minutes";
+          timerDisplay.className = "orange";
+        } else if (minutes === 22) {
+          timerDisplay.innerHTML = "Talk is Finished";
+          timerDisplay.className = "red";
+        } else if (minutes >= 23 && minutes <= 60) {
+          timerDisplay.innerHTML = "Questions and Answers";
+          timerDisplay.className = "purple";
+        } else if (minutes >= 61 && minutes <= 70) {
+          timerDisplay.innerHTML = "Questions and Answers";
+          timerDisplay.className = "red";
+        }
+      }, 1000);
+    </script>
+  </body>
+
+</html>
