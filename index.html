@@ -1,6 +1,11 @@
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <style>
       #timer {
         font-size: 36px;
@@ -9,7 +14,12 @@
         padding: 50px;
         width: 400px;
         height: 250px;
-        margin: 0 auto;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        border-radius: 25px;
       }
       .green {
         background-color: green;
@@ -23,19 +33,42 @@
       .purple {
         background-color: purple;
       }
+
+      .yellow {
+        background-color: rgba(255, 255, 0, 0.75);
+      }
+
       button {
+        margin-top: 20px;
         display: block;
         margin: 0 auto;
+        border-radius: 10px;
+        margin: 0;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        border-radius: 25px;
+      }
+
+      body {
+        background-image: url("cymatics.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
       }
     </style>
   </head>
   <body>
-    
-    <div id="timer" class="green">
-      <p >Presentation</p>
-      <p id="clock">00:00:00</p>
+    <div>
+      <div id="timer" class="yellow">
+        <p>Presentation</p>
+        <p id="clock">00:00:00</p>
+      </div>
+
+      <br />
+      <button id="resetBtn">Reset</button>
     </div>
-    <button id="resetBtn">Reset</button>
+
     <script>
       const timerDisplay = document.querySelector("#timer p:first-child");
       const clockDisplay = document.querySelector("#clock");
@@ -43,15 +76,15 @@
       let minutes = 0;
       let seconds = 0;
       let hours = 0;
-      
-      resetBtn.addEventListener("click", function() {
+
+      resetBtn.addEventListener("click", function () {
         hours = 0;
         minutes = 0;
         seconds = 0;
         clockDisplay.innerHTML = "00:00:00";
       });
-      
-      setInterval(function() {
+
+      setInterval(function () {
         seconds++;
         if (seconds === 60) {
           minutes++;
@@ -64,7 +97,9 @@
         if (hours === 24) {
           hours = 0;
         }
-        clockDisplay.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+        clockDisplay.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${
+          minutes < 10 ? `0${minutes}` : minutes
+        }:${seconds < 10 ? `0${seconds}` : seconds}`;
         if (minutes >= 0 && minutes <= 17) {
           timerDisplay.innerHTML = "Presentation";
           timerDisplay.className = "green";
@@ -84,5 +119,4 @@
       }, 1000);
     </script>
   </body>
-
 </html>
